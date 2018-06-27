@@ -19,3 +19,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# lock
+package-lock.json
+yarn.lock
+
+# Designer's file
+*.bmpr

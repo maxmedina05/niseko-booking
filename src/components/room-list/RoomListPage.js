@@ -61,6 +61,7 @@ export default class RoomListPage extends Component {
         {showNothingFoundErrorMessage && <p>Oh no. Nothing was found!</p>}
 
         <input
+          className="room-list-search-input"
           name="query"
           onChange={this.handleInputChange}
           onKeyDown={this.handleKeyDown}

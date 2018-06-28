@@ -32,4 +32,12 @@ describe('RoomList', () => {
     const rows = roomList.children();
     expect(rows.length).toBe(ROOMS.length);
   });
+
+  it('should render an error message when no rooms are displayed', () => {
+    const roomList = shallow(<RoomList rooms={[]} />);
+    const alertCard = roomList.find('div');
+    expect(alertCard.text()).toBe(
+      'Oh no. Nothing was found with that description. Please try again.'
+    );
+  });
 });

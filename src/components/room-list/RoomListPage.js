@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import RoomList from './RoomList';
+import RoomList from './room-list/RoomList';
 import { getRooms } from '../../services/room.service';
+import './RoomListPage.css';
 
 const STOP_TYPING_WAIT_TIME = 300;
 const ENTER_KEY = 13;
@@ -17,8 +18,7 @@ export default class RoomListPage extends Component {
     this.timer = null;
 
     this.state = {
-      rooms: [],
-      showNothingFoundErrorMessage: false
+      rooms: []
     };
   }
 
@@ -28,7 +28,7 @@ export default class RoomListPage extends Component {
 
   handleInputChange(event) {
     clearTimeout(this.timer);
-    const { name, value } = event.target;
+    const { value } = event.target;
 
     this.timer = setTimeout(this.triggerSearch, STOP_TYPING_WAIT_TIME, value);
   }
@@ -48,24 +48,25 @@ export default class RoomListPage extends Component {
     const rooms = await getRooms(query);
 
     this.setState({
-      rooms,
-      showNothingFoundErrorMessage: rooms.length <= 0
+      rooms
     });
   }
 
   render() {
-    const { rooms, showNothingFoundErrorMessage } = this.state;
+    const { rooms } = this.state;
 
     return (
       <Fragment>
-        {showNothingFoundErrorMessage && <p>Oh no. Nothing was found!</p>}
+        <div className="paper-card search-card">
+          <input
+            className="room-list-search-input form-control"
+            name="query"
+            placeholder="Where would you like to stay?"
+            onChange={this.handleInputChange}
+            onKeyDown={this.handleKeyDown}
+          />
+        </div>
 
-        <input
-          className="room-list-search-input"
-          name="query"
-          onChange={this.handleInputChange}
-          onKeyDown={this.handleKeyDown}
-        />
         <RoomList rooms={rooms} />
       </Fragment>
     );

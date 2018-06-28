@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
+import './RoomListPage.css';
+
 import RoomList from './room-list/RoomList';
 import { getRooms } from '../../services/room.service';
-import './RoomListPage.css';
 
 const STOP_TYPING_WAIT_TIME = 300;
 const ENTER_KEY = 13;
@@ -58,13 +59,20 @@ export default class RoomListPage extends Component {
     return (
       <Fragment>
         <div className="paper-card search-card">
-          <input
-            className="room-list-search-input form-control"
-            name="query"
-            placeholder="Where would you like to stay?"
-            onChange={this.handleInputChange}
-            onKeyDown={this.handleKeyDown}
-          />
+          <div className="input-group">
+            <input
+              className="room-list-search-input form-control"
+              name="query"
+              placeholder="Where would you like to stay?"
+              onChange={this.handleInputChange}
+              onKeyDown={this.handleKeyDown}
+            />
+            <div className="input-group-append">
+              <span class="input-group-text">
+                <i className="fa fa-search" />
+              </span>
+            </div>
+          </div>
         </div>
 
         <RoomList rooms={rooms} />
